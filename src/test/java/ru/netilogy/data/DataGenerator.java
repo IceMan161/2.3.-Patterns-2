@@ -28,7 +28,7 @@ public class DataGenerator {
     private static void sendRequest(RegistrationDto user) {
         given() // "дано"
                 .spec(requestSpec) // указываем, какую спецификацию используем
-                .body(new RegistrationDto("vasya", "password", "active")) // передаём в теле объект, который будет преобразован в JSON
+                .body(new RegistrationDto(getRandomLogin(),getRandomPassword(),"active")) // передаём в теле объект, который будет преобразован в JSON
                 .when() // "когда"
                 .post("/api/system/users") // на какой путь, относительно BaseUri отправляем запрос
                 .then() // "тогда ожидаем"
@@ -37,14 +37,14 @@ public class DataGenerator {
 
 
     public static String getRandomLogin() {
-        String login = getRandomLogin();
+        String login = faker.name().firstName();
         // TODO: добавить логику для объявления переменной login и задания её значения, для генерации
         //  случайного логина используйте faker
         return login;
     }
 
     public static String getRandomPassword() {
-        String password = getRandomPassword();
+        String password = faker.internet().password();
         // TODO: добавить логику для объявления переменной password и задания её значения, для генерации
         //  случайного пароля используйте faker
         return password;
