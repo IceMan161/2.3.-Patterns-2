@@ -23,8 +23,8 @@ public class AuthTest {
     @DisplayName("Should successfully login with active registered user")
     void shouldSuccessfulLoginIfRegisteredActiveUser() {
         var registeredUser = getRegisteredUser("active");
-        $("[name ='login']").val(getRandomLogin());
-        $("[name ='login']").val(getRandomPassword());
+        $("[name ='login']").val();
+        $("[name ='password']").val();
         $(withText("Продолжить")).click();
         // TODO: добавить логику теста, в рамках которого будет выполнена попытка входа в личный кабинет с учётными
         //  данными зарегистрированного активного пользователя, для заполнения полей формы используйте

@@ -28,7 +28,7 @@ public class DataGenerator {
     private static void sendRequest(RegistrationDto user) {
         given() // "дано"
                 .spec(requestSpec) // указываем, какую спецификацию используем
-                .body(new RegistrationDto(getRandomLogin(),getRandomPassword(),"active")) // передаём в теле объект, который будет преобразован в JSON
+                .body(new RegistrationDto(getRandomLogin(), getRandomPassword(), "active")) // передаём в теле объект, который будет преобразован в JSON
                 .when() // "когда"
                 .post("/api/system/users") // на какой путь, относительно BaseUri отправляем запрос
                 .then() // "тогда ожидаем"
@@ -55,19 +55,33 @@ public class DataGenerator {
         }
 
         public static RegistrationDto getUser(String status) {
-            RegistrationDto user = new RegistrationDto(getRandomLogin(),getRandomPassword(),status);
-
+            RegistrationDto user = new RegistrationDto(getRandomLogin(), getRandomPassword(), status);
             // TODO: создать пользователя user используя методы getRandomLogin(), getRandomPassword() и параметр status
             return user;
         }
 
         public static RegistrationDto getRegisteredUser(String status) {
             RegistrationDto registeredUser = getUser("active");
+            sendRequest(registeredUser);
             // TODO: объявить переменную registeredUser и присвоить ей значение возвращённое getUser(status).
             // Послать запрос на регистрацию пользователя с помощью вызова sendRequest(registeredUser)
             return registeredUser;
         }
+
+        public static RegistrationDto creatingUser() {
+
+            String login = faker.name().firstName();
+            String password = faker.internet().password();
+            String status = ("active");
+
+            RegistrationDto user = new RegistrationDto(login, password, status);
+
+            sendRequest(user);
+
+            return user;
+        }
     }
+
 
     @Value
     public static class RegistrationDto {
