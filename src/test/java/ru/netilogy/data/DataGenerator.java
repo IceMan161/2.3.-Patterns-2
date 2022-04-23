@@ -28,7 +28,7 @@ public class DataGenerator {
     private static void sendRequest(RegistrationDto user) {
         given() // "дано"
                 .spec(requestSpec) // указываем, какую спецификацию используем
-                .body(new RegistrationDto(getRandomLogin(), getRandomPassword(), "active")) // передаём в теле объект, который будет преобразован в JSON
+                .body(user) // передаём в теле объект, который будет преобразован в JSON
                 .when() // "когда"
                 .post("/api/system/users") // на какой путь, относительно BaseUri отправляем запрос
                 .then() // "тогда ожидаем"
@@ -61,7 +61,7 @@ public class DataGenerator {
         }
 
         public static RegistrationDto getRegisteredUser(String status) {
-            RegistrationDto registeredUser = getUser("active");
+            RegistrationDto registeredUser = getUser(status);
             sendRequest(registeredUser);
             // TODO: объявить переменную registeredUser и присвоить ей значение возвращённое getUser(status).
             // Послать запрос на регистрацию пользователя с помощью вызова sendRequest(registeredUser)
@@ -72,7 +72,7 @@ public class DataGenerator {
 
             String login = faker.name().firstName();
             String password = faker.internet().password();
-            String status = ("active");
+            String status = creatingUser().status;
 
             RegistrationDto user = new RegistrationDto(login, password, status);
 
