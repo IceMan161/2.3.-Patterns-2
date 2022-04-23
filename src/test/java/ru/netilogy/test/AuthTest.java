@@ -18,15 +18,13 @@ public class AuthTest {
 
     @BeforeEach
     void setup() {
+        Configuration.headless = true;
         open("http://localhost:9999");
     }
 
     @Test
     @DisplayName("Should successfully login with active registered user")
     void shouldSuccessfulLoginIfRegisteredActiveUser() {
-
-        Configuration.browserSize = "800x600";
-        Configuration.headless = true;
 
         var registeredUser = getRegisteredUser("active");
         $("[name ='login']").val(registeredUser.getLogin());
@@ -43,9 +41,6 @@ public class AuthTest {
     @DisplayName("Should get error message if login with not registered user")
     void shouldGetErrorIfNotRegisteredUser() {
 
-        Configuration.browserSize = "800x600";
-        Configuration.headless = true;
-
         var notRegisteredUser = getUser("not registered");
         $("[name ='login']").val(notRegisteredUser.getLogin());
         $("[name ='password']").val(notRegisteredUser.getPassword());
@@ -60,9 +55,6 @@ public class AuthTest {
     @DisplayName("Should get error message if login with blocked registered user")
     void shouldGetErrorIfBlockedUser() {
 
-        Configuration.browserSize = "800x600";
-        Configuration.headless = true;
-
         var blockedUser = getRegisteredUser("blocked");
         $("[name ='login']").val(blockedUser.getLogin());
         $("[name ='password']").val(blockedUser.getPassword());
@@ -76,9 +68,6 @@ public class AuthTest {
     @Test
     @DisplayName("Should get error message if login with wrong login")
     void shouldGetErrorIfWrongLogin() {
-
-        Configuration.browserSize = "800x600";
-        Configuration.headless = true;
 
         var registeredUser = getRegisteredUser("active");
         var wrongLogin = getRandomLogin();
@@ -95,9 +84,6 @@ public class AuthTest {
     @Test
     @DisplayName("Should get error message if login with wrong password")
     void shouldGetErrorIfWrongPassword() {
-
-        Configuration.browserSize = "800x600";
-        Configuration.headless = true;
 
         var registeredUser = getRegisteredUser("active");
         var wrongPassword = getRandomPassword();
