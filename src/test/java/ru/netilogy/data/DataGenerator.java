@@ -60,19 +60,6 @@ public class DataGenerator {
             sendRequest(registeredUser);
             return registeredUser;
         }
-
-        public static RegistrationDto creatingUser() {
-
-            String login = faker.name().firstName();
-            String password = faker.internet().password();
-            String status = creatingUser().status;
-
-            RegistrationDto user = new RegistrationDto(login, password, status);
-
-            sendRequest(user);
-
-            return user;
-        }
     }
 
 
